@@ -1,0 +1,19 @@
+.header{
+    background-color:rgba(231, 175, 107, 0.69)
+}
+
+.nave{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.checkout{
+    margin-top: 30px;
+    padding: 20px;
+}
+body{
+    font-family:'Times New Roman', Times, serif;
+    background-color: rgb(234, 211, 119);
+    margin: 0;
+}
