@@ -1,5 +1,6 @@
 .header{
-    background-color:rgba(231, 175, 107, 0.69)
+    background-color:rgb(255, 255, 255);
+    box-shadow: 0 0 1px 0 black;
 }
 
 .nave{
@@ -7,13 +8,41 @@
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    gap: 50px;
+}
+nav a{
+    text-decoration: none;
+    color: rgb(16, 8, 122);
+    gap: 20px;
 }
 .checkout{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 30px;
     padding: 20px;
 }
 body{
-    font-family:'Times New Roman', Times, serif;
-    background-color: rgb(234, 211, 119);
+    font-family: 'Inter', sans-serif;
+    background-color: rgb(235, 231, 227);
     margin: 0;
+}
+.logo{
+    width: 150px;
+}
+.center{
+    color: rgb(4, 4, 72);
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 auto;
+    background-color:aliceblue;
+    width: 15%;
+   
+}
+.opcoes{
+    display: flex;
+    gap: 50px;
+    border: 1px solid black;
 }
