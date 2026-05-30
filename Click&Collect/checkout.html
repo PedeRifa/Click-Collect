@@ -9,8 +9,7 @@
     <body>
         <header class="header">
             <nav class="nave">
-                <im
-                <h1>Checkout</h1>
+                <img class="logo" src="imagem/click&collect.png" alt="Logo">
                 <div>
                     <a href="index.html">Home</a>
                     <a href="produto.html">Produto</a>
@@ -19,20 +18,20 @@
             </nav>
         </header>
         <section class="checkout">
+            <h1 class="center">Escolha como vai retirar o produto:</h1>
             <div>
-                <div>
-                    <h2>Escolha como vai retirar o produto:</h2>
-                    <div>
-                        <label for="retirar">Retirar na loja:</label>
-                        <input type="radio" id="retirar" name="retirada">
+                <div class="opcoes">
+                    <div class="opcao" id="retirar">
+                        <h3>🏪 Retirar na loja</h3>
+                        <p>Retire em uma de nossas unidades.</p>
                     </div>
-                    <div>
-                        <label for="entrega">Entrega no local:</label>
-                        <input type="radio" id="entrega" name="entrega">
+                    <div class="opcao" id="entrega">
+                        <h3>🛻 Entrega no local</h3>
+                        <p>Receba o produto onde no local desejado.</p>
                     </div>
-                    <div id="info"></div>
-                    <div id="resultado"></div>
                 </div>
+                <div id="info"></div>
+                <div id="resultado"></div>
             </div>
         </section>
         <script src="checkout.js"></script>
