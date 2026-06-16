@@ -40,11 +40,12 @@ body{
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.1); 
     border-radius: 5px;
-    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin: 0 auto;
     background-color: rgb(252, 236, 228);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    width: 45%;
+    width: 35%;
 }
 
 .opcoes{
@@ -94,6 +95,64 @@ body{
     align-self: flex-end;  
     padding: 8px 16px;
     cursor: pointer;
+}
+.opcao3{
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.opcao3:hover{
+    border-color: #d73e0b;
+}
+.opcao3.ativa{
+    border-color: #d73e0b;
+    background-color: #fff4ee;
+}
+.confirmacao{
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid rgb(255, 2, 2);
+    border-radius: 8px;
+    background-color:#fff4ee;
+}
+
+.loja{
+    display: block;
+    margin-top: 10px 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.modelo{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0,0,0,0.5);
+}
+
+.modelo-conteudo{
+    background-color: rgb(255, 221, 194);
+    width: 500px;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.codigo-retirada{
+    font-size:24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    margin: 15px 0;
+    border: 2px dashed #d73e0b;
+    border-radius: 10px;
 }
 
 #fluxoBuscar {

@@ -42,17 +42,17 @@ const cep = document.getElementById("cep");
 cep.addEventListener("input", () => {
     cep.value = cep.value.replace(/\D/g, '');
 });
+this.validarCEP = validarCEP;
 function validarCEP(cep){
     return /^[0-9]{8}$/.test(cep);
 }
 
 async function buscarCEP(){
-    const cep = document.getElementById("cep").value;
-    if(!validarCEP(cep)){
+    if(!validarCEP(document.getElementById("cep").value)){
         alert("CEP inválido.");
         return;
     }
-    const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const resposta = await fetch(`https://viacep.com.br/ws/${document.getElementById("cep").value}/json/`);
     const dados = await resposta.json();
     const lojas = {
         "Canoas":[
@@ -220,6 +220,7 @@ document
     .addEventListener("click", buscarCEP);
 
 });
+
 this.validarCamposForm = validarCamposForm;
 function validarCamposForm(event)
 {
@@ -286,6 +287,41 @@ function validarCamposForm(event)
     return true;
 };
 
+this.campoCheioCEP = campoCheioCEP; //verifica se o campo cep ta cheio, pra usar pra preencher os outros qdo estiver...
+function campoCheioCEP()
+{
+    if (document.getElementById("cep").value.length === 8)
+    {
+        preencheCamposPorCEP();
+    }
+};
+
+async function preencheCamposPorCEP(){
+    //pega os dados
+    if(!/^[0-9]{8}$/.test(document.getElementById("cep").value)){
+        alert("CEP inválido.");
+        return;
+    }
+    const resposta = await fetch(`https://viacep.com.br/ws/${document.getElementById("cep").value}/json/`);
+    const dados = await resposta.json();
+    //prenchimento dos campos
+    if (dados.logradouro !== '') {
+        document.getElementById('endereco').value = dados.logradouro;
+    }
+    if (dados.bairro !== '') {
+        document.getElementById('bairro').value = dados.bairro;
+    }
+    if (dados.complemento !== '' && /^[0-9]{8}$/.test(dados.complemento)) {
+        document.getElementById('num').value = dados.complemento;
+    }
+    if (dados.localidade !== '') {
+        document.getElementById('cidade').value = dados.localidade;
+    }
+        if (dados.uf !== '') {
+        document.getElementById('uf').value = dados.uf.toLowerCase();
+    }
+};
+
 entrega.addEventListener("click",() => {
     entrega.classList.add("ativa");
     retirar.classList.remove("ativa");
@@ -295,7 +331,7 @@ entrega.addEventListener("click",() => {
         <h2>Entrega no local</h2>
             <div id="fluxoBuscar">
                 <div class="form-group"><label for="endereco">Endereço:</label><input type="text" id="endereco" placeholder="Av. Presidente Vargas"></div>
-                <div class="form-group"><label for="cep">CEP:</label><input type="text" id="cep" placeholder="91440567"></div>
+                <div class="form-group"><label for="cep">CEP:</label><input type="text" id="cep" placeholder="91440567" maxlength="8" oninput="campoCheioCEP();"></div>
                 <div class="form-group"><label for="bairro">Bairro:</label><input type="text" id="bairro" placeholder="Marechal Rondon"></div>
                 <div class="form-group"><label for="num">Nº:</label><input type="text" id="num" placeholder="12"></div>
                 <div class="form-group"><label for="cidade">Cidade:</label><input type="text" id="cidade" placeholder="Novo Hamburgo"></div>
