@@ -31,7 +31,7 @@ retirar.addEventListener("click",() => {
             <form>
                 <h2>Retirar na loja</h2>
                 <label for="cep">Digite seu CEP:</label>
-                <input type="text" id="cep" maxlength="8" placeholder="Ex.: 92000-000">
+                <input type="text" id="cep" maxlength="9" onkeydown="formataCampoCEP(tevent)" onkeyup="mascaraCampoCEP(event)" maxlength="8" placeholder="Ex.: 92000-000">
                 <button type="button" id="buscar">Buscar</button>
             </form>
         </div>
@@ -48,11 +48,11 @@ function validarCEP(cep){
 }
 
 async function buscarCEP(){
-    if(!validarCEP(document.getElementById("cep").value)){
+    if(!validarCEP(document.getElementById("cep").value.replace(/\D/g, ''))){
         alert("CEP inválido.");
         return;
     }
-    const resposta = await fetch(`https://viacep.com.br/ws/${document.getElementById("cep").value}/json/`);
+    const resposta = await fetch(`https://viacep.com.br/ws/${document.getElementById("cep").value.replace(/\D/g, '')}/json/`);
     const dados = await resposta.json();
     const lojas = {
         "Canoas":[
@@ -212,7 +212,12 @@ async function buscarCEP(){
                 });
                         })
             });
-        
+    //validações que achei pertinente em 16/06/2026, caso ache o contrário, favor entrar em contato. Ass: Leonardo de Bortoli    
+    } else if (dados.erro === "true") { //não acha cidade, único retorno do json é "erro": "true"
+        alert("Cidade não encontrada!")
+    } 
+    else { //acha cidade, mas !loja[cidade]
+        alert("Não possuímos estabelecimentos parceiros na cidade!")
     }
 }
 document
@@ -290,7 +295,7 @@ function validarCamposForm(event)
 this.campoCheioCEP = campoCheioCEP; //verifica se o campo cep ta cheio, pra usar pra preencher os outros qdo estiver...
 function campoCheioCEP()
 {
-    if (document.getElementById("cep").value.length === 8)
+    if (document.getElementById("cep").value.length === 9)
     {
         preencheCamposPorCEP();
     }
@@ -298,26 +303,26 @@ function campoCheioCEP()
 
 async function preencheCamposPorCEP(){
     //pega os dados
-    if(!/^[0-9]{8}$/.test(document.getElementById("cep").value)){
+    if(!/^[0-9]{8}$/.test(document.getElementById("cep").value.replace(/\D/g, ''))){
         alert("CEP inválido.");
         return;
     }
-    const resposta = await fetch(`https://viacep.com.br/ws/${document.getElementById("cep").value}/json/`);
+    const resposta = await fetch(`https://viacep.com.br/ws/${document.getElementById("cep").value.replace(/\D/g, '')}/json/`);
     const dados = await resposta.json();
     //prenchimento dos campos
-    if (dados.logradouro !== '') {
+    if (dados.logradouro !== '' && dados.logradouro !== undefined) {
         document.getElementById('endereco').value = dados.logradouro;
     }
-    if (dados.bairro !== '') {
+    if (dados.bairro !== '' && dados.bairro !== undefined) {
         document.getElementById('bairro').value = dados.bairro;
     }
-    if (dados.complemento !== '' && /^[0-9]{8}$/.test(dados.complemento)) {
+    if (dados.complemento !== '' && /^[0-9]{8}$/.test(dados.complemento) && dados.complemento !== undefined) {
         document.getElementById('num').value = dados.complemento;
     }
-    if (dados.localidade !== '') {
+    if (dados.localidade !== '' && dados.localidade !== undefined) {
         document.getElementById('cidade').value = dados.localidade;
     }
-        if (dados.uf !== '') {
+        if (dados.uf !== '' && dados.uf !== undefined) {
         document.getElementById('uf').value = dados.uf.toLowerCase();
     }
 };
@@ -331,12 +336,12 @@ entrega.addEventListener("click",() => {
         <h2>Entrega no local</h2>
             <div id="fluxoBuscar">
                 <div class="form-group"><label for="endereco">Endereço:</label><input type="text" id="endereco" placeholder="Av. Presidente Vargas"></div>
-                <div class="form-group"><label for="cep">CEP:</label><input type="text" id="cep" placeholder="91440567" maxlength="8" oninput="campoCheioCEP();"></div>
+                <div class="form-group"><label for="cep">CEP:</label><input type="text" id="cep" placeholder="91440567" maxlength="9" onkeydown="formataCampoCEP(event)" onkeyup="mascaraCampoCEP(event)" oninput="campoCheioCEP();"></div>
                 <div class="form-group"><label for="bairro">Bairro:</label><input type="text" id="bairro" placeholder="Marechal Rondon"></div>
                 <div class="form-group"><label for="num">Nº:</label><input type="text" id="num" placeholder="12"></div>
                 <div class="form-group"><label for="cidade">Cidade:</label><input type="text" id="cidade" placeholder="Novo Hamburgo"></div>
                 <div class="form-group"><label for="uf">UF:</label><select name="uf" id="uf">
-                <option value="" disabled>--Selecione uma UF--</option>
+                <option value="" selected>--Selecione uma UF--</option>
                 <optgroup label="Sul">
                     <option value="pr">Paraná</option> 
                    <option value="rs">Rio Grande do Sul</option>
@@ -382,3 +387,30 @@ entrega.addEventListener("click",() => {
     </form>
     `;
 });
+
+//eventos de formatacao e mascara
+this.formataCampoCEP = formataCampoCEP;
+function formataCampoCEP(event) {
+    if (!/^[0-9]$/.test(event.key) 
+        && event.key !== "Backspace" && event.key !== "Escape" && event.key !== "Enter"
+        && event.key !== "ArrowRight" && event.key !== "ArrowLeft"
+        && event.key !== "ArrowUp" && event.key !== "ArrowDown"){
+        event.preventDefault();
+    } 
+};
+
+this.mascaraCampoCEP = mascaraCampoCEP;
+
+function mascaraCampoCEP(event) {
+    let valorCep = document.getElementById("cep").value;
+    
+    valorCep = valorCep.replace(/\D/g, "");
+
+    if (valorCep.length > 8) {
+        valorCep = valorCep.substring(0, 8);
+    }
+    if (valorCep.length > 5) {
+        valorCep = valorCep.replace(/^(\d{5})(\d{1,3})/, "$1-$2");
+    }
+    document.getElementById("cep").value = valorCep;
+}

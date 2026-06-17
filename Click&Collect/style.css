@@ -177,6 +177,7 @@ body{
     flex: 1; 
     padding: 6px;
 }
+
 .botaoSubmit {
     display: block;
     margin-top: 20px;
@@ -191,4 +192,148 @@ body{
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+}
+
+#resultado {
+    width: 100%;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#resultado li {
+    list-style-type: none;
+}
+
+#resultado .center {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 15px;
+    font-size: 1.2rem;
+}
+
+.opcao3 {
+    padding: 16px 20px;
+    border: 2px solid #ccc; 
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgb(249, 246, 243);
+    margin: 0; 
+}
+
+.loja {
+    display: block;
+    color: rgb(4, 4, 72);
+}
+
+.opcao3:hover {
+    border-color: #d73e0b;
+    background-color: #fcece3;
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.opcao3.ativa {
+    border-color: #d73e0b;
+    background-color: #fff4ee;
+}
+
+.modelo {
+    display: none;
+    position: fixed;
+    z-index: 10; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(3px); 
+}
+
+.modelo-conteudo {
+    background-color: rgb(252, 236, 228); 
+    width: 90%; 
+    max-width: 500px; 
+    margin: 10vh auto;
+    padding: 30px;
+    border-radius: 12px;
+    position: relative; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
+    color: rgb(4, 4, 72);
+}
+
+#fechar {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    line-height: 1;
+}
+
+#fechar:hover {
+    color: #d73e0b; 
+}
+
+#conteudomodelo h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+}
+
+#conteudomodelo p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+#conteudomodelo div:not(.codigo-retirada) {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+#confirmar-retirada, 
+#cancelar-retirada, 
+#fechar-confirmacao {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#confirmar-retirada, 
+#fechar-confirmacao {
+    background-color: #d73e0b;
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 10px rgba(215, 62, 11, 0.25);
+}
+
+#confirmar-retirada:hover, 
+#fechar-confirmacao:hover {
+    background-color: #bf3508;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(215, 62, 11, 0.35);
+}
+
+#cancelar-retirada {
+    background-color: transparent;
+    color: #555;
+    border: 2px solid #ccc;
+}
+
+#cancelar-retirada:hover {
+    background-color: #fff;
+    border-color: #999;
+    color: #333;
 }
