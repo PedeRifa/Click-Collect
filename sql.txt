@@ -1,0 +1,193 @@
+== CREATE
+CREATE TABLE clientes
+(
+  id_cliente int PRIMARY KEY,
+  nome_cliente varchar(40) NOT NULL,
+  email varchar(40) NOT NULL
+);
+
+CREATE TABLE lojas
+(
+  id_loja int PRIMARY KEY,
+  nome_loja varchar(40) NOT NULL,
+  uf varchar(2) NOT NULL
+);
+
+CREATE TABLE produtos
+(
+  id_produto int PRIMARY KEY,
+  nome_produto varchar(40) NOT NULL,
+  cliente int NOT NULL,
+  loja int NOT NULL,
+  FOREIGN KEY (cliente) REFERENCES cliente(id_cliente),
+  FOREIGN KEY (loja) REFERENCES loja(id_loja)
+);
+==INCLUDES CLIENTES
+INSERT INTO clientes (id_cliente, nome_cliente, email) 
+VALUES 
+  (1, 'Alice Campos', 'alice.campos@email.com'),
+  (2, 'Bruno Henrique', 'bruno.h@email.com.br'),
+  (3, 'Camila Rocha', 'camila.rocha@provedor.com'),
+  (4, 'Daniel Machado', 'daniel.machado@email.com'),
+  (5, 'Eduarda Nunes', 'eduarda.nunes@email.com.br'),
+  (6, 'Felipe Costa', 'felipe.costa@email.com'),
+  (7, 'Gabriela Pereira', 'gabi.pereira@provedor.com'),
+  (8, 'Hugo Martins', 'hugo.martins@email.com.br'),
+  (9, 'Isabela Ribeiro', 'isa.ribeiro@email.com'),
+  (10, 'João Vitor Mendes', 'jv.mendes@email.com.br'),
+  (11, 'Karina Silva', 'karina.silva@provedor.com'),
+  (12, 'Leonardo Santos', 'leo.santos@email.com'),
+  (13, 'Marcelo Moraes', 'marcelo.moraes@email.com.br'),
+  (14, 'Natália Gomes', 'nat.gomes@email.com'),
+  (15, 'Otávio Castro', 'otavio.castro@provedor.com'),
+  (16, 'Paula Azevedo', 'paula.azevedo@email.com.br'),
+  (17, 'Ricardo Barros', 'ricardo.barros@email.com'),
+  (18, 'Rafael Teixeira', 'rafael.teixeira@email.com.br'),
+  (19, 'Sofia Monteiro', 'sofia.monteiro@provedor.com'),
+  (20, 'Thiago Assis', 'thiago.assis@email.com');
+==INCLUDES LOJAS
+INSERT INTO lojas (id_loja, nome_loja, uf) 
+VALUES 
+  (1, 'MC Donalds - Canoas, Centro', 'RS'),
+  (2, 'Renner - Canoas, Mathias Velho', 'RS'),
+  (3, 'NET - Canoas, Niterói', 'RS'),
+
+  (4, 'Starbucks - Porto Alegre, Centro Histórico', 'RS'),
+  (5, 'Royal Trudel - Porto Alegre, Menino Deus', 'RS'),
+  (6, 'Mini-Kalzone - Porto Alegre, Sarandi', 'RS'),
+
+  (7, 'Lauros - Gravataí, Centro', 'RS'),
+  (8, 'Cremolatto - Gravataí, Castelo Branco', 'RS'),
+  (9, 'Subway - Gravataí, Bernabé', 'RS'),
+
+  (10, 'Nike - São Leopoldo, Feitoria', 'RS'),
+  (11, 'Adidas - São Leopoldo, Centro', 'RS'),
+  (12, 'NewBalance - São Leopoldo, Vicentina', 'RS'),
+
+  (13, 'São João - Novo Hamburgo, Canudos', 'RS'),
+  (14, 'Panvel - Novo Hamburgo, Estância Velha', 'RS'),
+  (15, 'Droga Raia - Novo Hamburgo, Boa Saúde', 'RS'),
+
+  (16, 'Caça e Pesca - Nova Santa Rita, Berto Círio', 'RS'),
+  (17, 'Petlove - Nova Santa Rita, Califórnia', 'RS');
+==INCLUDES PRODUTOS
+INSERT INTO produtos (id_produto, nome_produto, cliente, loja) 
+VALUES 
+  -- Loja 1: MC Donalds (Canoas)
+  (1, 'Big Mac', 1, 1),
+  (2, 'McChicken', 2, 1),
+  (3, 'Batata Frita Grande', 3, 1),
+  (4, 'Refrigerante 500ml', 4, 1),
+  (5, 'McFlurry Ovomaltine', 5, 1),
+
+  -- Loja 2: Renner (Canoas)
+  (6, 'Camiseta Básica Branca', 6, 2),
+  (7, 'Calça Jeans Skinny', 7, 2),
+  (8, 'Jaqueta de Couro', 8, 2),
+  (9, 'Tênis Casual Preto', 9, 2),
+  (10, 'Vestido Floral', 10, 2),
+
+  -- Loja 3: NET (Canoas)
+  (11, 'Internet 500 Mega', 11, 3),
+  (12, 'Combo TV + Internet', 12, 3),
+  (13, 'Ponto Adicional TV', 13, 3),
+  (14, 'Roteador Wi-Fi Mesh', 14, 3),
+  (15, 'Plano Fixo Ilimitado', 15, 3),
+
+  -- Loja 4: Starbucks (Porto Alegre)
+  (16, 'Frappuccino Morango', 16, 4),
+  (17, 'Cappuccino Tradicional', 17, 4),
+  (18, 'Espresso Duplo', 18, 4),
+  (19, 'Pão de Queijo', 19, 4),
+  (20, 'Muffin de Mirtilo', 20, 4),
+
+  -- Loja 5: Royal Trudel (Porto Alegre)
+  (21, 'Trudel Doce de Leite', 1, 5),
+  (22, 'Trudel de Nutella', 2, 5),
+  (23, 'Trudel Tradicional', 3, 5),
+  (24, 'Trudel com Morango', 4, 5),
+  (25, 'Água Mineral Sem Gás', 5, 5),
+
+  -- Loja 6: Mini-Kalzone (Porto Alegre)
+  (26, 'Kalzone de Frango', 6, 6),
+  (27, 'Kalzone de Calabresa', 7, 6),
+  (28, 'Kalzone 4 Queijos', 8, 6),
+  (29, 'Suco Natural Laranja', 9, 6),
+  (30, 'Kalzone de Chocolate', 10, 6),
+
+  -- Loja 7: Lauros (Gravataí)
+  (31, 'Xis Salada', 11, 7),
+  (32, 'Cachorro Quente Duplo', 12, 7),
+  (33, 'Pastel de Carne', 13, 7),
+  (34, 'Refrigerante Lata 350ml', 14, 7),
+  (35, 'Porção de Fritas', 15, 7),
+
+  -- Loja 8: Cremolatto (Gravataí)
+  (36, 'Sorvete Chocolate 2L', 16, 8),
+  (37, 'Picolé de Uva', 17, 8),
+  (38, 'Sundae Caramelo', 18, 8),
+  (39, 'Milkshake Morango', 19, 8),
+  (40, 'Pote Flocos 1,5L', 20, 8),
+
+  -- Loja 9: Subway (Gravataí)
+  (41, 'Frango Teriyaki 15cm', 1, 9),
+  (42, 'Baratíssimo de Frango', 2, 9),
+  (43, 'BMT 30cm', 3, 9),
+  (44, 'Cookie Gotas Chocolate', 4, 9),
+  (45, 'Refrigerante Refil', 5, 9),
+
+  -- Loja 10: Nike (São Leopoldo)
+  (46, 'Tênis Air Max', 6, 10),
+  (47, 'Camiseta Dri-FIT', 7, 10),
+  (48, 'Calça de Moletom', 8, 10),
+  (49, 'Meias Esportivas Cano Alto', 9, 10),
+  (50, 'Bola de Futebol Campo', 10, 10),
+
+  -- Loja 11: Adidas (São Leopoldo)
+  (51, 'Tênis Ultraboost', 11, 11),
+  (52, 'Jaqueta Corta Vento', 12, 11),
+  (53, 'Mochila Esportiva', 13, 11),
+  (54, 'Shorts de Corrida', 14, 11),
+  (55, 'Boné Logo Adidas', 15, 11),
+
+  -- Loja 12: NewBalance (São Leopoldo)
+  (56, 'Tênis 574 Casual', 16, 12),
+  (57, 'Tênis 1080 Corrida', 17, 12),
+  (58, 'Camiseta de Corrida', 18, 12),
+  (59, 'Top Esportivo Feminino', 19, 12),
+  (60, 'Viseira Ajustável', 20, 12),
+
+  -- Loja 13: São João (Novo Hamburgo)
+  (61, 'Dipirona 500mg', 1, 13),
+  (62, 'Shampoo Anticaspa Clear', 2, 13),
+  (63, 'Desodorante Rexona', 3, 13),
+  (64, 'Sabonete Líquido Dove', 4, 13),
+  (65, 'Fralda Pampers M', 5, 13),
+
+  -- Loja 14: Panvel (Novo Hamburgo)
+  (66, 'Vitamina C Efervescente', 6, 14),
+  (67, 'Protetor Solar FPS 50', 7, 14),
+  (68, 'Hidratante Corporal Corporal', 8, 14),
+  (69, 'Escova de Dentes Macia', 9, 14),
+  (70, 'Absorvente Noturno', 10, 14),
+
+  -- Loja 15: Droga Raia (Novo Hamburgo)
+  (71, 'Paracetamol 750mg', 11, 15),
+  (72, 'Creme Dental Colgate', 12, 15),
+  (73, 'Álcool em Gel 70%', 13, 15),
+  (74, 'Curativos Band-Aid', 14, 15),
+  (75, 'Soro Fisiológico 500ml', 15, 15),
+
+  -- Loja 16: Caça e Pesca (Nova Santa Rita)
+  (76, 'Vara de Pesca Carbono', 16, 16),
+  (77, 'Isca Artificial Sapinho', 17, 16),
+  (78, 'Barraca Camping 4 Pessoas', 18, 16),
+  (79, 'Canivete Suíço 12 Funções', 19, 16),
+  (80, 'Lanterna de Cabeça LED', 20, 16),
+
+  -- Loja 17: Petlove (Nova Santa Rita)
+  (81, 'Ração Golden Cães 15kg', 1, 17),
+  (82, 'Coleira Anti-pulgas', 2, 17),
+  (83, 'Brinquedo Osso Borracha', 3, 17),
+  (84, 'Petisco Bifinho Sabor Carne', 4, 17),
+  (85, 'Areia Higiênica Gatos 4kg', 5, 17);
