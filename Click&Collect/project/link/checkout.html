@@ -9,31 +9,36 @@
     <body>
         <header class="header">
             <nav class="nave">
-                <img class="logo" src="/imagem/click&collect.png" alt="Logo">
-                <div>
-                    <a href="index.html">Home</a>
-                    <a href="produto.html">Produto</a>
-                    <a href="checkout.html">Checkout</a>
+                <img class="logo" src="/imagem/click&collect.png" alt="Megaloja">
+                <div class="menu-links">
+                    <a href="index.html">🏠 Home</a>
+                    <a href="produto.html">🛍️ Produto</a>
+                    <a href="checkout.html" class="active">🛒 Checkout</a>
                 </div>
             </nav>
         </header>
-        <section class="checkout">
-            <h1 class="center">Escolha como vai retirar o produto:</h1>
-            <div>
-                <div class="opcoes">
-                    <div class="opcao" id="retirar">
-                        <h3>🏪 Retirar na loja</h3>
-                        <p>Retire em uma de nossas unidades.</p>
+
+        <!-- Envolva a section principal nesta classe para alinhar com o menu lateral -->
+        <main class="conteudo-principal">
+            <section class="checkout">
+                <h1 class="center">Escolha como vai retirar o produto:</h1>
+                <div>
+                    <div class="opcoes">
+                        <div class="opcao" id="retirar">
+                            <h3>🏪 Retirar na loja</h3>
+                            <p>Retire em uma de nossas unidades.</p>
+                        </div>
+                        <div class="opcao" id="entrega">
+                            <h3>🛍️ Entrega no local</h3>
+                            <p>Receba o produto no local desejado.</p>
+                        </div>
                     </div>
-                    <div class="opcao" id="entrega">
-                        <h3>🛍️ Entrega no local</h3>
-                        <p>Receba o produto onde no local desejado.</p>
-                    </div>
+                    <div id="info"></div>
+                    <div id="resultado"></div>
                 </div>
-                <div id="info"></div>
-                <div id="resultado"></div>
-            </div>
-        </section>
+            </section>
+        </main>
+
         <div id="modelo" class="modelo">
             <div class="modelo-conteudo">
                 <span id="fechar">&times;</span>
